@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.dao.master.UserDao">
+	<resultMap id="BaseResultMap" type="com.example.domain.master.UserVo">
+		<result column="id" property="id" />
+		<result column="user_name" property="userName" />
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		id, user_name
+	</sql>
+
+	<select id="findById" resultMap="BaseResultMap" parameterType="java.lang.Long">
+		select
+			<include refid="Base_Column_List" />
+		from
+			user
+		where
+			id = #{id}
+	</select>
+
+</mapper>

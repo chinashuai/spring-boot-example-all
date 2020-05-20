@@ -1,0 +1,15 @@
+GET http://localhost:8087/actuator/info
+
+###
+
+GET http://localhost:8087/actuator/beans
+
+###
+
+GET http://localhost:8087/actuator/health
+
+###
+
+GET http://localhost:8087/actuator/conditions
+
+###

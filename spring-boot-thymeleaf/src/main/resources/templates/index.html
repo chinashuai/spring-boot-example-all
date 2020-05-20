@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>thymeleaf example </title>
+</head>
+<body>
+<div>
+    <h1>This is h1 标签</h1>
+    <br/>
+    <br/>
+    <a th:href="${index}">点击跳转至ChinaXieShuai的博客地址</a>
+    <br/>
+    <br/>
+    <span th:text="'Welcome to ChinaXieShuai：   ' + ${index} + '!'"></span>
+    <br/>
+    <br/>
+    <span th:text="|Welcome to ChinaXieShuai:     ${index}!|"></span>
+    <br/>
+    <br/>
+</div>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.shard.dao.TUserDao">
+
+	<resultMap id="TUser" type="com.example.shard.domain.TUser" >
+		<result column="id" property="id"/>
+		<result column="user_id" property="userId"/>
+		<result column="remark" property="remark"/>
+	</resultMap>
+
+	<!-- 通用查询结果列-->
+	<sql id="Base_Column_List">
+		id,
+		user_id,
+		remark
+	</sql>
+
+	<!-- 查询（根据主键ID查询） -->
+	<select id="selectByPrimaryKey" resultMap="TUser" parameterType="java.lang.Long">
+		 SELECT
+		 <include refid="Base_Column_List" />
+		 FROM t_user
+		 WHERE id = #{id}
+	</select>
+
+	<!--删除：根据主键ID删除-->
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+		 DELETE FROM t_user
+		 WHERE id = #{id}
+	</delete>
+
+	<!-- 添加 -->
+	<insert id="insert" parameterType="com.example.shard.domain.TUser">
+		 INSERT INTO t_user
+ 		(
+			 id,
+			 user_id,
+			 remark
+		) 
+		 VALUES 
+ 		(
+			 #{id},
+			 #{userId},
+			 #{remark}
+ 		) 
+		 <selectKey keyProperty="id" resultType="Long" order="AFTER">
+			 select LAST_INSERT_ID()
+		 </selectKey>
+	</insert>
+
+	<!-- 修 改-->
+	<update id="updateByPrimaryKeySelective" parameterType="com.example.shard.domain.TUser">
+		 UPDATE t_user
+ 		 <set> 
+			<if test="userId != null">
+				 user_id = #{userId},
+			</if>
+			<if test="remark != null and remark != ''">
+				 remark = #{remark},
+			</if>
+
+ 		 </set>
+		 WHERE id = #{id}
+	</update>
+
+	<!-- list4Page 分页查询-->
+	<select id="list4Page" resultMap="TUser">
+		 SELECT 
+		 <include refid="Base_Column_List" />
+		 from t_user
+ 		 where 1=1  
+		<if test="record.id != null">
+			 and id = #{record.id} 
+		</if>
+		<if test="record.userId != null">
+			 and user_id = #{record.userId} 
+		</if>
+		<if test="record.remark != null and record.remark != ''">
+			 and remark = #{record.remark} 
+		</if>
+		<if test="commonQueryParam != null">
+			<if test="commonQueryParam.start != null  and commonQueryParam.pageSize != null">
+				 limit #{commonQueryParam.start}, #{commonQueryParam.pageSize}
+			</if>
+		</if>
+	</select>
+	<!-- count 总数-->
+	<select id="count" resultType="long">
+		 SELECT 
+		 count(1) 
+		 from t_user
+ 		 where 1=1  
+		<if test="record.id != null">
+			 and id = #{record.id} 
+		</if>
+		<if test="record.userId != null">
+			 and user_id = #{record.userId} 
+		</if>
+		<if test="record.remark != null and record.remark != ''">
+			 and remark = #{record.remark} 
+		</if>
+	</select>
+	<!-- list 查询-->
+	<select id="list" resultMap="TUser">
+		 SELECT 
+		 <include refid="Base_Column_List" />
+		 from t_user
+ 		 where 1=1  
+		<if test="record.id != null">
+			 and id = #{record.id} 
+		</if>
+		<if test="record.userId != null">
+			 and user_id = #{record.userId} 
+		</if>
+		<if test="record.remark != null and record.remark != ''">
+			 and remark = #{record.remark} 
+		</if>
+	</select>
+</mapper>
