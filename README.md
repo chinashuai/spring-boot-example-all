@@ -31,6 +31,7 @@ Spring Boot 使用的各种入门示例，以最简单、最实用为标准，�
 - [spring-boot-actuator](https://github.com/chinashuai/spring-boot-example-all/tree/master/spring-boot-actuator) : Spring Boot 整合 Actuator 的示例
 - [spring-boot-eureka](https://github.com/chinashuai/spring-boot-example-all/tree/master/spring-boot-eureka) : Spring Boot 整合 Eureka 的示例
 - [spring-boot-hystrix](https://github.com/chinashuai/spring-boot-example-all/tree/master/spring-boot-hystrix) : Spring Boot 整合 Hystrix 的示例
+- [spring-boot-sharding-JDBC](https://github.com/chinashuai/spring-boot-example-all/tree/master/spring-boot-sharding) : Spring Boot 整合 sharding-JDBC 的示例
 
 
 **参考文章**
