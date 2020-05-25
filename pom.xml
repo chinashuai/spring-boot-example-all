@@ -25,6 +25,7 @@
         <module>spring-boot-eureka</module>
         <module>spring-boot-sharding</module>
         <module>spring-boot-sharding-proxy</module>
+        <module>spring-boot-zookeeper</module>
     </modules>
 
 
