@@ -15,8 +15,17 @@ import java.util.concurrent.CountDownLatch;
 public class ZKWorkIDConf implements ApplicationRunner {
     private final static Logger log = LoggerFactory.getLogger(ZKWorkIDConf.class);
 
+    /**
+     * 根目录
+     */
     public final static String ZK_ROOT_PATH = "/CoreAssetAccountID";
+    /**
+     * 分布式 id 的根目录
+     */
     public final static String ZK_ROOT_PATH_ID_GEN = "/CoreAssetAccountID/IdGen";
+    /**
+     * 分布式 id 的根目录下，自增 workId 前缀部分
+     */
     public final static String ZK_ROOT_PATH_ID_GEN_WORD_ID_START = "ID-";
 
     @Value("${zk.url}")
