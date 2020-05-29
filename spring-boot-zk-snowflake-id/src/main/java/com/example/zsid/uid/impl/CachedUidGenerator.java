@@ -47,7 +47,7 @@ import java.util.List;
  * 
  * @author baidu
  */
-public class CachedUidGenerator extends DefaultUidGenerator implements DisposableBean {
+public class CachedUidGenerator extends DefaultUidGenerator {
     private static final Logger LOGGER = LoggerFactory.getLogger(CachedUidGenerator.class);
     private static final int DEFAULT_BOOST_POWER = 3;
 
@@ -63,14 +63,9 @@ public class CachedUidGenerator extends DefaultUidGenerator implements Disposabl
     private RingBuffer ringBuffer;
     private BufferPaddingExecutor bufferPaddingExecutor;
 
-    public CachedUidGenerator(Long workerIdAssignerWorkId) {
-        super(workerIdAssignerWorkId);
-    }
-
-    //    @Override
-    public void afterPropertiesSet() throws Exception {
+    public CachedUidGenerator(long workerIdAssignerWorkId) {
         // initialize workerId & bitsAllocator
-//        super.afterPropertiesSet();
+        super(workerIdAssignerWorkId);
         
         // initialize RingBuffer & RingBufferPaddingExecutor
         this.initRingBuffer();
@@ -92,11 +87,6 @@ public class CachedUidGenerator extends DefaultUidGenerator implements Disposabl
         return super.parseUID(uid);
     }
     
-    @Override
-    public void destroy() throws Exception {
-        bufferPaddingExecutor.shutdown();
-    }
-
     /**
      * Get the UIDs in the same specified second under the max sequence
      * 

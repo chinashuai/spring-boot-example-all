@@ -45,6 +45,7 @@ import java.util.concurrent.TimeUnit;
  * | sign |     delta seconds    | worker node id | sequence  |
  * +------+----------------------+----------------+-----------+
  *   1bit          28bits              22bits         13bits
+ *   1bit          40bits              10bits         13bits
  * }</pre>
  * <p>
  * You can also specified the bits by Spring property setting.

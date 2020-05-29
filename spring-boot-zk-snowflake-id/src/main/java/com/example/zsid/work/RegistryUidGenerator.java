@@ -99,8 +99,14 @@ public class RegistryUidGenerator implements ApplicationContextAware {
 //        UidGenerator beanService = (CachedUidGenerator) context.getBean(beanName);
 //
         long workId = disposableWorkerIdAssigner.assignWorkerId();
-        DefaultUidGenerator defaultUidGenerator = new DefaultUidGenerator(workId);
-        MAP.put(beanName, defaultUidGenerator);
+
+        // use CachedUidGenerator
+        // CachedUidGenerator UidGenerator = new CachedUidGenerator(workId);
+
+        // use DefaultUidGenerator
+        DefaultUidGenerator UidGenerator = new DefaultUidGenerator(workId);
+
+        MAP.put(beanName, UidGenerator);
     }
 
     /**
