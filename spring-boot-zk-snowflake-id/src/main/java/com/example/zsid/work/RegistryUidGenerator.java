@@ -50,7 +50,7 @@ public class RegistryUidGenerator implements ApplicationContextAware {
 
 
     private static Set<String> BEAN_SET = Sets.newHashSet(
-            "TUser"
+            "CacheUser", "DefaultUser"
     );
     /**
      * 刷新
@@ -105,6 +105,10 @@ public class RegistryUidGenerator implements ApplicationContextAware {
 
         // use DefaultUidGenerator
         DefaultUidGenerator UidGenerator = new DefaultUidGenerator(workId);
+
+        if ("CacheUser".equalsIgnoreCase(beanName)) {
+            UidGenerator = new CachedUidGenerator(workId);
+        }
 
         MAP.put(beanName, UidGenerator);
     }
@@ -169,4 +173,29 @@ public class RegistryUidGenerator implements ApplicationContextAware {
         }
         throw new RuntimeException(String.format("beanName=%s 无对应的bean", beanName));
     }
+
+    /**
+     * parseId
+     *
+     * @param beanName
+     * @param id
+     * @return
+     */
+    public String parseId(String beanName, long id) {
+        Preconditions.checkState(BEAN_SET.contains(beanName), "beanName = %s 没有配置唯一ID", beanName);
+        UidGenerator uidGenerator = generateUidGenerator(beanName);
+        if (uidGenerator != null) {
+            try {
+                return uidGenerator.parseUID(id);
+            } catch (Exception e) {
+                LOG.error("uidGenerator.parseUID() beanName = {} error", beanName, e);
+                synchronized (RegistryUidGenerator.class) {
+                    refreshBean(beanName);
+                }
+                return uidGenerator.parseUID(id);
+            }
+        }
+        throw new RuntimeException(String.format("beanName=%s 无对应的bean", beanName));
+    }
+
 }

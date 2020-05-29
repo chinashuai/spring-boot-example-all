@@ -1,13 +1,6 @@
 package com.example.zsid.vo;
 
-
-
-/**
- * 
- * t_user分库分表
- * 
- **/
-public class TUser implements java.io.Serializable {
+public class CacheUser implements java.io.Serializable {
 
 
   private static final long serialVersionUID = 1L;
