@@ -1,6 +1,5 @@
 package com.example.config.rabbitmq;
 
-import com.alibaba.fastjson.JSON;
 import org.springframework.amqp.core.AcknowledgeMode;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;

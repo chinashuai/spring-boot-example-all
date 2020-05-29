@@ -53,40 +53,4 @@ public class ZKCURDController {
         client.setData().withVersion(stat.getVersion()).forPath("/update/test2", "test2-update".getBytes());
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-//    @Autowired
-//    private ZkClient zkClient;
-
-    private String url = "127.0.0.1:2181";
-    private int timeout = 3000;
-    private String lockPath = "/testl";
-
-    @Autowired
-    private ZKlock zklock;
-
-    private int k = 1;
-
-    @GetMapping("/lock")
-    public Boolean getLock() throws Exception {
-
-        for (int i = 0; i < 10; i++) {
-            new Thread(() -> {
-                zklock.lock();
-                zklock.unlock();
-            }).start();
-        }
-        return true;
-    }
 }

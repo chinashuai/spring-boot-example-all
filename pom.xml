@@ -26,6 +26,7 @@
         <module>spring-boot-sharding</module>
         <module>spring-boot-sharding-proxy</module>
         <module>spring-boot-zookeeper</module>
+        <module>spring-boot-zk-snowflake-id</module>
     </modules>
 
 
