@@ -49,7 +49,7 @@ public class RegistryUidGenerator implements ApplicationContextAware {
     private static ConcurrentHashMap<String, UidGenerator> MAP = new ConcurrentHashMap<>();
 
 
-    private static Set<String> BEAN_SET = Sets.newHashSet(
+    private static Set<String> DOMAIN_BEAN_NAME_SET = Sets.newHashSet(
             "CacheUser", "DefaultUser"
     );
     /**
@@ -66,7 +66,7 @@ public class RegistryUidGenerator implements ApplicationContextAware {
         MAP.clear();
 
         synchronized (RegistryUidGenerator.class) {
-            for (String beanName : BEAN_SET) {
+            for (String beanName : DOMAIN_BEAN_NAME_SET) {
                 refreshBean(beanName);
             }
         }
@@ -81,7 +81,7 @@ public class RegistryUidGenerator implements ApplicationContextAware {
      * @param beanName
      */
     public void refreshBean(String beanName) {
-        Preconditions.checkState(BEAN_SET.contains(beanName), "beanName = %s 没有配置唯一ID", beanName);
+        Preconditions.checkState(DOMAIN_BEAN_NAME_SET.contains(beanName), "beanName = %s 没有配置唯一ID", beanName);
 //
 //        // Bean的实例工厂
 //        DefaultListableBeanFactory dbf = (DefaultListableBeanFactory) context.getAutowireCapableBeanFactory();
@@ -120,7 +120,7 @@ public class RegistryUidGenerator implements ApplicationContextAware {
      * @return
      */
     public UidGenerator generateUidGenerator(String beanName) {
-        Preconditions.checkState(BEAN_SET.contains(beanName), "beanName = %s 没有配置唯一ID", beanName);
+        Preconditions.checkState(DOMAIN_BEAN_NAME_SET.contains(beanName), "beanName = %s 没有配置唯一ID", beanName);
         //刷新的过程中，等待刷新完毕
         while (REFRESH_FLAG.get()) {
 
@@ -157,7 +157,7 @@ public class RegistryUidGenerator implements ApplicationContextAware {
      * @return
      */
     public long getId(String beanName) {
-        Preconditions.checkState(BEAN_SET.contains(beanName), "beanName = %s 没有配置唯一ID", beanName);
+        Preconditions.checkState(DOMAIN_BEAN_NAME_SET.contains(beanName), "beanName = %s 没有配置唯一ID", beanName);
         UidGenerator uidGenerator = generateUidGenerator(beanName);
         if (uidGenerator != null) {
             try {
@@ -182,7 +182,7 @@ public class RegistryUidGenerator implements ApplicationContextAware {
      * @return
      */
     public String parseId(String beanName, long id) {
-        Preconditions.checkState(BEAN_SET.contains(beanName), "beanName = %s 没有配置唯一ID", beanName);
+        Preconditions.checkState(DOMAIN_BEAN_NAME_SET.contains(beanName), "beanName = %s 没有配置唯一ID", beanName);
         UidGenerator uidGenerator = generateUidGenerator(beanName);
         if (uidGenerator != null) {
             try {
