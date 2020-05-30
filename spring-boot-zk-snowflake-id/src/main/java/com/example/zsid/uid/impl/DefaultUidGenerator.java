@@ -134,9 +134,7 @@ public class DefaultUidGenerator implements UidGenerator {
         Date thatTime = new Date(TimeUnit.SECONDS.toMillis(epochSeconds + deltaSeconds));
         String thatTimeStr = DateUtils.formatByDateTimePattern(thatTime);
 
-        System.out.println('1' + toBinaryString(timestampBits, deltaSeconds) + " " +
-                toBinaryString(workerIdBits, workerId) + " " +
-                toBinaryString(sequenceBits, sequence));
+        System.out.println('0' + toBinaryString(timestampBits, deltaSeconds) + " " + toBinaryString(workerIdBits, workerId) + " " + toBinaryString(sequenceBits, sequence));
         // format as string
         return String.format("{\"UID\":\"%d\",\"timestamp\":\"%s\",\"workerId\":\"%d\",\"sequence\":\"%d\"}",
                 uid, thatTimeStr, workerId, sequence);
